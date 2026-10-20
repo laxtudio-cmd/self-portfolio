@@ -15,10 +15,16 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 1.05rem/1.6 "Work Sans",system-ui,sans-serif}
 main{max-width:1000px;margin:0 auto;padding:0 1.5rem}
 h1,h2,h3{font-family:"Bodoni Moda",Georgia,serif;margin:0;line-height:1.05}
-header{padding:12vh 0 8vh}
+header{padding:12vh 0 8vh;display:grid;grid-template-columns:1fr minmax(180px,230px);gap:2.5rem;align-items:center}
+.portrait{position:relative;margin:0;background:var(--card);border-radius:16px;padding:2.2rem .9rem;transform:rotate(3deg);box-shadow:0 3px 0 rgba(0,0,0,.25),0 14px 30px rgba(0,0,0,.18)}
+.portrait .idx{position:absolute;top:.6rem;left:.8rem;font:800 1.2rem/1 "Bodoni Moda",serif;color:#a8232b}
+.portrait .idx.b{top:auto;left:auto;bottom:.6rem;right:.8rem;transform:rotate(180deg)}
+.photo{aspect-ratio:3/4;border:2px dashed #c9b98f;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#4e6a60;font-size:.9rem;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+@media (max-width:700px){header{grid-template-columns:1fr}.portrait{max-width:200px}}
 h1{font-size:clamp(2.6rem,8vw,5.5rem);font-weight:800;letter-spacing:-.02em}
 .code{margin:1rem 0 0;color:var(--brass);font-weight:500}
-h1 .hon{font-size:.32em;font-weight:500;letter-spacing:0;margin-right:.3em;color:var(--brass);vertical-align:.5em}
+h1 .hon{font-size:.32em;font-weight:500;letter-spacing:0;margin-right:.1em;color:var(--brass);vertical-align:.5em}
 .lede{max-width:34rem;margin:1.5rem 0 0;color:var(--mute);font-size:1.2rem}
 .links{display:flex;gap:1.5rem;margin-top:2rem;flex-wrap:wrap}
 a{color:var(--fg);text-decoration-color:var(--brass);text-underline-offset:4px}
@@ -55,18 +61,34 @@ h2{font-size:2.2rem;font-weight:500;margin-bottom:.4rem}
 .chips li{padding:.45rem 1.1rem;border-radius:999px;font-weight:500;border:2px dashed rgba(255,250,240,.7)}
 .chips .skill{background:#a8232b;color:#fffaf0;box-shadow:0 0 0 3px #a8232b,0 5px 0 rgba(0,0,0,.25)}
 .chips .interest{background:#d2ac55;color:#16342b;border-color:rgba(22,52,43,.6);box-shadow:0 0 0 3px #d2ac55,0 5px 0 rgba(0,0,0,.25)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.frame{margin:0}
+.open{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:16/9;padding:0;border:2px dashed var(--line);border-radius:14px;background:transparent;color:var(--mute);font:inherit;font-size:.95rem;cursor:pointer;overflow:hidden;transition:transform .2s}
+.open:hover{transform:translateY(-4px)}
+.open img{width:100%;height:100%;object-fit:cover;display:block}
+.frame figcaption{margin-top:.5rem;font-size:.9rem;color:var(--mute);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+dialog{max-width:min(92vw,1100px);width:100%;border:0;border-radius:14px;padding:1rem;background:var(--card);color:#16342b}
+dialog::backdrop{background:rgba(0,0,0,.75)}
+dialog img{width:100%;height:auto;max-height:75vh;object-fit:contain;display:block;border-radius:8px}
+dialog .ph{display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;border:2px dashed #c9b98f;border-radius:8px}
+dialog p{margin:.8rem 0 0}
+dialog button{margin-top:.8rem;background:#16342b;color:#f3ecd9;border:0;border-radius:999px;padding:.4rem 1.1rem;font:inherit;cursor:pointer}
 footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
 #theme{position:fixed;top:calc(env(safe-area-inset-top,0px) + .8rem);right:1rem;background:var(--card);color:#16342b;border:0;border-radius:999px;padding:.4rem .9rem;font:inherit;font-size:.9rem;cursor:pointer}
-@media (prefers-reduced-motion:reduce){.card,.flush a{transition:none}}
+@media (prefers-reduced-motion:reduce){.card,.flush a,.open{transition:none}}
 </style>
 </head>
 <body>
 <button id="theme" type="button">Switch theme</button>
 <main>
 <header>
-<h1><span class="hon">Mr.</span>Mukul Dev Laxwal</h1>
+<div class="intro">
+<h1><span class="hon">Mr.</span> Mukul Dev Laxwal</h1>
 <p class="code">Also known as PYTHONX-01</p>
 <p class="lede">BS Mathematics student at IIT Madras. I write Python and Bash, build for the web, and spend most of my time on Linux.</p>
+</div>
+<!-- To add your photo: replace the span with <img src="photo.jpg" alt="Photo of Mukul"> -->
+<figure class="portrait"><span class="idx">K♥</span><div class="photo"><span>Your photo here</span></div><span class="idx b">K♥</span></figure>
 </header>
 
 <section id="work">
@@ -76,6 +98,20 @@ footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
 <button class="card" aria-pressed="false"><span class="front"><span class="rank r">A♥</span><span><h3>PYTHONX Toolkit</h3><p>Small Python and Bash tools for everyday Linux work.</p></span><small>Planned — tap to flip</small></span><span class="back"><h3>PYTHONX Toolkit</h3><p>A collection of command-line scripts that automate the boring parts of working on Linux. Each tool will get its own short write-up and a link to the code.</p><p><small>Python · Bash · Linux</small></p></span></button>
 <button class="card" aria-pressed="false"><span class="front"><span class="rank">K♠</span><span><h3>Maths Playground</h3><p>Interactive visuals for ideas from my maths courses.</p></span><small>Planned — tap to flip</small></span><span class="back"><h3>Maths Playground</h3><p>Browser demos that let you drag a slider and watch a concept change, starting with whatever I am studying that week.</p><p><small>JavaScript · HTML · Maths</small></p></span></button>
 <button class="card" aria-pressed="false"><span class="front"><span class="rank r">Q♦</span><span><h3>This Portfolio</h3><p>The card-table site you are looking at.</p></span><small>In progress — tap to flip</small></span><span class="back"><h3>This Portfolio</h3><p>A hand-built personal site with a poker theme. Still being updated as I add real projects and links.</p><p><small>HTML · CSS · JavaScript</small></p></span></button>
+</div>
+</section>
+
+<section id="art">
+<h2>Art</h2>
+<p class="sub">I draw digitally. Still learning, but I can hold my own.</p>
+<!-- To add art: put <img src="art/your-image.jpg" alt="Describe the drawing"> in place of the "Artwork coming soon" span, and write your description in the figcaption. -->
+<div class="gallery">
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
 </div>
 </section>
 
@@ -96,7 +132,7 @@ footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
 <p class="sub">Skills are the cards I can play right now. Interests are the ones I’m still drawing.</p>
 <div class="groups">
 <div><h3>Skills</h3><p>What I can build with today.</p>
-<ul class="chips"><li class="skill">Python</li><li class="skill">Bash</li><li class="skill">JavaScript</li><li class="skill">Linux</li><li class="skill">Web development</li></ul></div>
+<ul class="chips"><li class="skill">Python</li><li class="skill">Bash</li><li class="skill">JavaScript</li><li class="skill">Linux</li><li class="skill">Web development</li><li class="skill">Digital art</li></ul></div>
 <div><h3>Interests</h3><p>What I’m studying, chasing, or just enjoy.</p>
 <ul class="chips"><li class="interest">Maths</li><li class="interest">Cybersecurity</li><li class="interest">Quant</li><li class="interest">AI &amp; ML</li><li class="interest">Anime</li><li class="interest">Gaming</li></ul></div>
 </div>
@@ -115,7 +151,21 @@ footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
 </section>
 </main>
 <footer><main>© 2026 Mukul Dev Laxwal</main></footer>
+<dialog id="viewer"><div id="viewer-media"></div><p id="viewer-text"></p><button type="button" id="viewer-close">Close</button></dialog>
 <script>
+var v=document.getElementById('viewer'),vm=document.getElementById('viewer-media'),vt=document.getElementById('viewer-text');
+document.querySelectorAll('.frame .open').forEach(function(b){
+  b.addEventListener('click',function(){
+    var img=b.querySelector('img');
+    vm.innerHTML='';
+    if(img){var i=document.createElement('img');i.src=img.src;i.alt=img.alt;vm.appendChild(i);}
+    else{var d=document.createElement('div');d.className='ph';d.textContent='Artwork coming soon';vm.appendChild(d);}
+    vt.textContent=b.parentNode.querySelector('figcaption').textContent;
+    v.showModal();
+  });
+});
+document.getElementById('viewer-close').addEventListener('click',function(){v.close();});
+v.addEventListener('click',function(e){if(e.target===v)v.close();});
 document.querySelectorAll('.card').forEach(function(c){
   c.addEventListener('click',function(){
     c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');
