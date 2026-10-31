@@ -4,29 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mukul Dev Laxwal — Portfolio</title>
+<meta name="description" content="Mukul Dev Laxwal (PYTHONX-01): BS Mathematics student at IIT Madras. Python, Bash, web development, cybersecurity and digital art.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mukul Dev Laxwal — Portfolio">
+<meta property="og:description" content="BS Mathematics student at IIT Madras. Python, Bash, web development, cybersecurity and digital art.">
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,800&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<script>
+try{if(localStorage.getItem('px-poker')==='off'){document.documentElement.setAttribute('data-mode','plain');}}catch(e){}
+</script>
 <style>
-:root{--bg:#f3ecd9;--fg:#16342b;--mute:#4e6a60;--card:#fffaf0;--line:#c9b98f;--red:#a8232b;--brass:#8a6a1e;
+:root{--bg:#f3ecd9;--fg:#16342b;--mute:#4e6a60;--card:#fffaf0;--line:#c9b98f;--red:#a8232b;--brass:#8a6a1e;--ink:#16342b;--inkmute:#4e6a60;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f3327;--fg:#f3ecd9;--mute:#a9bfb3;--card:#f3ecd9;--line:#2c5848;--red:#b3262e;--brass:#d2ac55}}
 :root[data-theme="dark"]{--bg:#0f3327;--fg:#f3ecd9;--mute:#a9bfb3;--card:#f3ecd9;--line:#2c5848;--red:#b3262e;--brass:#d2ac55}
+html:root[data-mode="plain"]{color-scheme:dark;--bg:#0d0e11;--fg:#e9e9ec;--mute:#9a9ca6;--card:#16171c;--line:#2a2c33;--red:#7aa2f7;--brass:#7aa2f7;--ink:#e9e9ec;--inkmute:#9a9ca6}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 1.05rem/1.6 "Work Sans",system-ui,sans-serif}
 main{max-width:1000px;margin:0 auto;padding:0 1.5rem}
 h1,h2,h3{font-family:"Bodoni Moda",Georgia,serif;margin:0;line-height:1.05}
+#progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:5px;z-index:20}
+#progress span{display:block;height:100%;width:0;background:var(--brass)}
 header{padding:12vh 0 8vh;display:grid;grid-template-columns:1fr minmax(180px,230px);gap:2.5rem;align-items:center}
 .portrait{position:relative;margin:0;background:var(--card);border-radius:16px;padding:2.2rem .9rem;transform:rotate(3deg);box-shadow:0 3px 0 rgba(0,0,0,.25),0 14px 30px rgba(0,0,0,.18)}
 .portrait .idx{position:absolute;top:.6rem;left:.8rem;font:800 1.2rem/1 "Bodoni Moda",serif;color:#a8232b}
 .portrait .idx.b{top:auto;left:auto;bottom:.6rem;right:.8rem;transform:rotate(180deg)}
-.photo{aspect-ratio:3/4;border:2px dashed #c9b98f;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:#4e6a60;font-size:.9rem;overflow:hidden}
+.photo{aspect-ratio:3/4;border:2px dashed #c9b98f;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--inkmute);font-size:.9rem;overflow:hidden}
 .photo img{width:100%;height:100%;object-fit:cover;display:block}
 @media (max-width:700px){header{grid-template-columns:1fr}.portrait{max-width:200px}}
 h1{font-size:clamp(2.6rem,8vw,5.5rem);font-weight:800;letter-spacing:-.02em}
 .code{margin:1rem 0 0;color:var(--brass);font-weight:500}
 h1 .hon{font-size:.32em;font-weight:500;letter-spacing:0;margin-right:.1em;color:var(--brass);vertical-align:.5em}
 .lede{max-width:34rem;margin:1.5rem 0 0;color:var(--mute);font-size:1.2rem}
-.links{display:flex;gap:1.5rem;margin-top:2rem;flex-wrap:wrap}
 a{color:var(--fg);text-decoration-color:var(--brass);text-underline-offset:4px}
 a:hover{color:var(--brass)}
 :focus-visible{outline:3px solid var(--brass);outline-offset:3px}
@@ -34,7 +43,7 @@ section{padding:6vh 0;border-top:1px solid var(--line)}
 h2{font-size:2.2rem;font-weight:500;margin-bottom:.4rem}
 .sub{color:var(--mute);margin:0 0 2rem}
 .hand{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
-.card{background:var(--card);color:#16342b;border:0;border-radius:14px;padding:1.1rem;text-align:left;font:inherit;cursor:pointer;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 0 rgba(0,0,0,.25);transition:transform .2s}
+.card{background:var(--card);color:var(--ink);border:0;border-radius:14px;padding:1.1rem;text-align:left;font:inherit;cursor:pointer;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 0 rgba(0,0,0,.25);transition:transform .2s}
 .card:hover{transform:translateY(-8px)}
 .card .rank{font:800 2rem/1 "Bodoni Moda",serif}
 .card .rank.r{color:var(--red)}
@@ -43,15 +52,13 @@ h2{font-size:2.2rem;font-weight:500;margin-bottom:.4rem}
 .card .back{display:none}
 .card[aria-pressed="true"] .front{display:none}
 .card[aria-pressed="true"] .back{display:block}
-.card small{color:#4e6a60}
+.card small{color:var(--inkmute)}
 .about{max-width:38rem}
-.skills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;padding:0;list-style:none}
-.skills li{border:1px solid var(--line);border-radius:999px;padding:.25rem .9rem;font-size:.95rem}
 .flush{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-top:1rem}
-.flush a{background:var(--card);color:#16342b;text-decoration:none;border-radius:14px;padding:1rem;min-height:210px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 0 rgba(0,0,0,.25);transition:transform .2s;overflow-wrap:anywhere}
+.flush a{background:var(--card);color:var(--ink);text-decoration:none;border-radius:14px;padding:1rem;min-height:210px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 0 rgba(0,0,0,.25);transition:transform .2s;overflow-wrap:anywhere}
 .flush .rank{font:800 1.8rem/1 "Bodoni Moda",serif}
 .flush strong{font:800 1.3rem/1.1 "Bodoni Moda",serif;display:block}
-.flush small{color:#4e6a60;font-size:.85rem;display:block;margin-top:.3rem}
+.flush small{color:var(--inkmute);font-size:.85rem;display:block;margin-top:.3rem}
 @media (min-width:760px){.flush a:nth-child(1){transform:rotate(-5deg)}.flush a:nth-child(2){transform:rotate(-2.5deg)}.flush a:nth-child(4){transform:rotate(2.5deg)}.flush a:nth-child(5){transform:rotate(5deg)}}
 .flush a:hover,.flush a:focus-visible{transform:translateY(-12px) rotate(0)}
 .groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.5rem}
@@ -67,19 +74,36 @@ h2{font-size:2.2rem;font-weight:500;margin-bottom:.4rem}
 .open:hover{transform:translateY(-4px)}
 .open img{width:100%;height:100%;object-fit:cover;display:block}
 .frame figcaption{margin-top:.5rem;font-size:.9rem;color:var(--mute);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-dialog{max-width:min(92vw,1100px);width:100%;border:0;border-radius:14px;padding:1rem;background:var(--card);color:#16342b}
+dialog{max-width:min(92vw,1100px);width:100%;border:0;border-radius:14px;padding:1rem;background:var(--card);color:var(--ink)}
 dialog::backdrop{background:rgba(0,0,0,.75)}
 dialog img{width:100%;height:auto;max-height:75vh;object-fit:contain;display:block;border-radius:8px}
-dialog .ph{display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;border:2px dashed #c9b98f;border-radius:8px}
+dialog .ph{display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;border:2px dashed var(--line);border-radius:8px}
 dialog p{margin:.8rem 0 0}
-dialog button{margin-top:.8rem;background:#16342b;color:#f3ecd9;border:0;border-radius:999px;padding:.4rem 1.1rem;font:inherit;cursor:pointer}
+dialog button{margin-top:.8rem;background:var(--ink);color:var(--card);border:0;border-radius:999px;padding:.4rem 1.1rem;font:inherit;cursor:pointer}
 footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
-#theme{position:fixed;top:calc(env(safe-area-inset-top,0px) + .8rem);right:1rem;background:var(--card);color:#16342b;border:0;border-radius:999px;padding:.4rem .9rem;font:inherit;font-size:.9rem;cursor:pointer}
+#controls{position:fixed;top:calc(env(safe-area-inset-top,0px) + .8rem);right:1rem;display:flex;gap:.5rem;z-index:30}
+#controls button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;font:inherit;font-size:.9rem;cursor:pointer}
+.pl{display:none}
+/* Plain mode: no poker, always dark */
+html[data-mode="plain"] .pk,html[data-mode="plain"] .rank,html[data-mode="plain"] .idx,html[data-mode="plain"] #theme{display:none}
+html[data-mode="plain"] .pl{display:inline}
+html[data-mode="plain"] h1,html[data-mode="plain"] h2,html[data-mode="plain"] h3,html[data-mode="plain"] .flush strong{font-family:"Work Sans",system-ui,sans-serif}
+html[data-mode="plain"] .portrait{transform:none;padding:0;background:none;box-shadow:none}
+html[data-mode="plain"] .photo{border:1px solid var(--line);border-radius:14px}
+html[data-mode="plain"] .card,html[data-mode="plain"] .flush a{border:1px solid var(--line);box-shadow:none}
+html[data-mode="plain"] .flush a:nth-child(n){transform:none}
+html[data-mode="plain"] .flush a:hover,html[data-mode="plain"] .flush a:focus-visible{transform:translateY(-4px)}
+html[data-mode="plain"] .chips li{border:1px solid var(--line);background:var(--card);color:var(--fg);box-shadow:none}
+html[data-mode="plain"] .chips .skill{border-color:var(--brass)}
 @media (prefers-reduced-motion:reduce){.card,.flush a,.open{transition:none}}
 </style>
 </head>
 <body>
+<div id="progress" aria-hidden="true"><span></span></div>
+<div id="controls">
 <button id="theme" type="button">Switch theme</button>
+<button id="poker" type="button" aria-pressed="true">Poker: on</button>
+</div>
 <main>
 <header>
 <div class="intro">
@@ -87,17 +111,16 @@ footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
 <p class="code">Also known as PYTHONX-01</p>
 <p class="lede">BS Mathematics student at IIT Madras. I write Python and Bash, build for the web, and spend most of my time on Linux.</p>
 </div>
-<!-- To add your photo: replace the span with <img src="photo.jpg" alt="Photo of Mukul"> -->
-<figure class="portrait"><span class="idx">K♥</span><div class="photo"><span>Your photo here</span></div><span class="idx b">K♥</span></figure>
+<figure class="portrait"><span class="idx">K♥</span><div class="photo"><img src="A.jpeg" alt="Photo of Mukul"></div><span class="idx b">K♥</span></figure>
 </header>
 
 <section id="work">
 <h2>Selected work</h2>
-<p class="sub">Three cards on the table. Tap one to flip it.</p>
+<p class="sub"><span class="pk">Three cards on the table. Tap one to flip it.</span><span class="pl">Three projects. Tap one for details.</span></p>
 <div class="hand">
-<button class="card" aria-pressed="false"><span class="front"><span class="rank r">A♥</span><span><h3>PYTHONX Toolkit</h3><p>Small Python and Bash tools for everyday Linux work.</p></span><small>Planned — tap to flip</small></span><span class="back"><h3>PYTHONX Toolkit</h3><p>A collection of command-line scripts that automate the boring parts of working on Linux. Each tool will get its own short write-up and a link to the code.</p><p><small>Python · Bash · Linux</small></p></span></button>
-<button class="card" aria-pressed="false"><span class="front"><span class="rank">K♠</span><span><h3>Maths Playground</h3><p>Interactive visuals for ideas from my maths courses.</p></span><small>Planned — tap to flip</small></span><span class="back"><h3>Maths Playground</h3><p>Browser demos that let you drag a slider and watch a concept change, starting with whatever I am studying that week.</p><p><small>JavaScript · HTML · Maths</small></p></span></button>
-<button class="card" aria-pressed="false"><span class="front"><span class="rank r">Q♦</span><span><h3>This Portfolio</h3><p>The card-table site you are looking at.</p></span><small>In progress — tap to flip</small></span><span class="back"><h3>This Portfolio</h3><p>A hand-built personal site with a poker theme. Still being updated as I add real projects and links.</p><p><small>HTML · CSS · JavaScript</small></p></span></button>
+<button class="card" aria-pressed="false"><span class="front"><span class="rank r">A♥</span><span><h3>PYTHONX Toolkit</h3><p>Small Python and Bash tools for everyday Linux work.</p></span><small>Planned — tap for more</small></span><span class="back"><h3>PYTHONX Toolkit</h3><p>A collection of command-line scripts that automate the boring parts of working on Linux. Each tool will get its own short write-up and a link to the code.</p><p><small>Python · Bash · Linux</small></p></span></button>
+<button class="card" aria-pressed="false"><span class="front"><span class="rank">K♠</span><span><h3>Maths Playground</h3><p>Interactive visuals for ideas from my maths courses.</p></span><small>Planned — tap for more</small></span><span class="back"><h3>Maths Playground</h3><p>Browser demos that let you drag a slider and watch a concept change, starting with whatever I am studying that week.</p><p><small>JavaScript · HTML · Maths</small></p></span></button>
+<button class="card" aria-pressed="false"><span class="front"><span class="rank r">Q♦</span><span><h3>This Portfolio</h3><p><span class="pk">The card-table site you are looking at.</span><span class="pl">The site you are looking at.</span></p></span><small>In progress — tap for more</small></span><span class="back"><h3>This Portfolio</h3><p>A hand-built personal site<span class="pk"> with a poker theme</span>. Still being updated as I add real projects and links.</p><p><small>HTML · CSS · JavaScript</small></p></span></button>
 </div>
 </section>
 
@@ -106,12 +129,12 @@ footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
 <p class="sub">I draw digitally. Still learning, but I can hold my own.</p>
 <!-- To add art: put <img src="art/your-image.jpg" alt="Describe the drawing"> in place of the "Artwork coming soon" span, and write your description in the figcaption. -->
 <div class="gallery">
-<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
-<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
-<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
-<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
-<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
-<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Describe this drawing here.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span><img src="genesis.png" alt="whale"></span></button><figcaption>Weightless genesis, a drawing that was made around being liminal at best</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span><img src="snake.jpg" alt="A clown trapped in a vicious cycle"></span></button><figcaption>A clown in a vicious cycle of entertaining everyone but not looking at himself</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Coming soon.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Coming soon.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Coming soon.</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Coming soon.</figcaption></figure>
 </div>
 </section>
 
@@ -122,38 +145,61 @@ footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
 <p>I’m also getting into cybersecurity. I’m decent at it, and still learning something new every week.</p>
 <p>Away from the keyboard, I watch anime. Favorites: Chainsaw Man, One Piece, JoJo’s Bizarre Adventure, One Punch Man and Frieren.</p>
 <p>I also play games: DOOM, Cyberpunk 2077, Neverness to Everness, Where Winds Meet, MiSide, and whatever else looks fun.</p>
-<p>The card-table theme is not random: I’m really into poker. My favorite hand to play is Ace-King.</p>
-<p><a href="#">Download my CV</a></p>
-
+<p class="pk">The card-table theme is not random: I’m really into poker. My favorite hand to play is Ace-King.</p>
 </div>
 </section>
 
 <section id="skills">
 <h2>Skills &amp; interests</h2>
-<p class="sub">Skills are the cards I can play right now. Interests are the ones I’m still drawing.</p>
+<p class="sub"><span class="pk">Skills are the cards I can play right now. Interests are the ones I’m still drawing.</span><span class="pl">Skills are what I can build with today. Interests are what I’m growing into.</span></p>
 <div class="groups">
 <div><h3>Skills</h3><p>What I can build with today.</p>
 <ul class="chips"><li class="skill">Python</li><li class="skill">Bash</li><li class="skill">JavaScript</li><li class="skill">Linux</li><li class="skill">Web development</li><li class="skill">Digital art</li></ul></div>
 <div><h3>Interests</h3><p>What I’m studying, chasing, or just enjoy.</p>
-<ul class="chips"><li class="interest">Maths</li><li class="interest">Cybersecurity</li><li class="interest">Quant</li><li class="interest">AI &amp; ML</li><li class="interest">Anime</li><li class="interest">Poker</li><li class="interest">Gaming</li></ul></div>
+<ul class="chips"><li class="interest">Maths</li><li class="interest">Cybersecurity</li><li class="interest">Quant</li><li class="interest">AI &amp; ML</li><li class="interest">Anime</li><li class="interest pk">Poker</li><li class="interest">Gaming</li></ul></div>
 </div>
 </section>
 
 <section id="contact">
 <h2>Contact</h2>
-<p class="sub">Five cards, one royal flush. Pick one and get in touch.</p>
+<p class="sub"><span class="pk">Five cards, one royal flush. Pick one and get in touch.</span><span class="pl">Pick one and get in touch.</span></p>
 <div class="flush">
 <a href="mailto:laxtudio@gmail.com"><span class="rank">A♠</span><span><strong>Email</strong><small>laxtudio@gmail.com</small></span></a>
 <a href="mailto:ma26b013@smail.iitm.ac.in"><span class="rank">K♠</span><span><strong>College</strong><small>ma26b013@smail.iitm.ac.in</small></span></a>
-<a href="#"><span class="rank">Q♠</span><span><strong>GitHub</strong><small>Code and experiments</small></span></a>
-<a href="#"><span class="rank">J♠</span><span><strong>LinkedIn</strong><small>Professional profile</small></span></a>
-<a href="#"><span class="rank">10♠</span><span><strong>Instagram</strong><small>Say hi</small></span></a>
+<a href="https://github.com/laxtudio-cmd" target="_blank" rel="noopener"><span class="rank">Q♠</span><span><strong>GitHub</strong><small>Code and experiments</small></span></a>
+<a href="https://www.linkedin.com/in/mukul-dev-laxwal-laxtudio" target="_blank" rel="noopener"><span class="rank">J♠</span><span><strong>LinkedIn</strong><small>Professional profile</small></span></a>
+<a href="https://www.instagram.com/mukuldevvv/" target="_blank" rel="noopener"><span class="rank">10♠</span><span><strong>Instagram</strong><small>Say hi</small></span></a>
 </div>
 </section>
 </main>
 <footer><main>© 2026 Mukul Dev Laxwal</main></footer>
 <dialog id="viewer"><div id="viewer-media"></div><p id="viewer-text"></p><button type="button" id="viewer-close">Close</button></dialog>
 <script>
+var root=document.documentElement;
+var bar=document.querySelector('#progress span');
+function updateProgress(){
+  var h=document.documentElement;
+  var max=h.scrollHeight-h.clientHeight;
+  var p=max>0?h.scrollTop/max:0;
+  bar.style.width=(Math.min(Math.max(p,0),1)*100)+'%';
+}
+window.addEventListener('scroll',updateProgress,{passive:true});
+window.addEventListener('resize',updateProgress);
+updateProgress();
+var pbtn=document.getElementById('poker');
+function setPokerLabel(){
+  var on=root.getAttribute('data-mode')!=='plain';
+  pbtn.textContent='Poker: '+(on?'on':'off');
+  pbtn.setAttribute('aria-pressed',on?'true':'false');
+}
+setPokerLabel();
+pbtn.addEventListener('click',function(){
+  if(root.getAttribute('data-mode')==='plain'){root.removeAttribute('data-mode');}
+  else{root.setAttribute('data-mode','plain');}
+  setPokerLabel();
+  try{localStorage.setItem('px-poker',root.getAttribute('data-mode')==='plain'?'off':'on');}catch(e){}
+  updateProgress();
+});
 var v=document.getElementById('viewer'),vm=document.getElementById('viewer-media'),vt=document.getElementById('viewer-text');
 document.querySelectorAll('.frame .open').forEach(function(b){
   b.addEventListener('click',function(){
@@ -173,9 +219,8 @@ document.querySelectorAll('.card').forEach(function(c){
   });
 });
 document.getElementById('theme').addEventListener('click',function(){
-  var r=document.documentElement;
-  var dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
-  r.dataset.theme=dark?'light':'dark';
+  var dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  root.dataset.theme=dark?'light':'dark';
 });
 </script>
 </body>
