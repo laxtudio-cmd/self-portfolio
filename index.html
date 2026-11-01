@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-mode="plain">
 <head>
+  <script>
+try{if(localStorage.getItem('px-poker')==='on'){document.documentElement.removeAttribute('data-mode');}}catch(e){}
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mukul Dev Laxwal — Portfolio</title>
@@ -9,9 +12,7 @@
 <meta property="og:title" content="Mukul Dev Laxwal — Portfolio">
 <meta property="og:description" content="BS Mathematics student at IIT Madras. Python, Bash, web development, cybersecurity and digital art.">
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,800&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
-<script>
-try{if(localStorage.getItem('px-poker')==='off'){document.documentElement.setAttribute('data-mode','plain');}}catch(e){}
-</script>
+
 <style>
 :root{--bg:#f3ecd9;--fg:#16342b;--mute:#4e6a60;--card:#fffaf0;--line:#c9b98f;--red:#a8232b;--brass:#8a6a1e;--ink:#16342b;--inkmute:#4e6a60;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -26,11 +27,128 @@ h1,h2,h3{font-family:"Bodoni Moda",Georgia,serif;margin:0;line-height:1.05}
 #progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:5px;z-index:20}
 #progress span{display:block;height:100%;width:0;background:var(--brass)}
 header{padding:12vh 0 8vh;display:grid;grid-template-columns:1fr minmax(180px,230px);gap:2.5rem;align-items:center}
-.portrait{position:relative;margin:0;background:var(--card);border-radius:16px;padding:2.2rem .9rem;transform:rotate(3deg);box-shadow:0 3px 0 rgba(0,0,0,.25),0 14px 30px rgba(0,0,0,.18)}
-.portrait .idx{position:absolute;top:.6rem;left:.8rem;font:800 1.2rem/1 "Bodoni Moda",serif;color:#a8232b}
-.portrait .idx.b{top:auto;left:auto;bottom:.6rem;right:.8rem;transform:rotate(180deg)}
-.photo{aspect-ratio:3/4;border:2px dashed #c9b98f;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--inkmute);font-size:.9rem;overflow:hidden}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+.portrait {
+  position: relative;
+  margin: 0;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 2.2rem .9rem;
+  transform: rotate(3deg);
+  box-shadow: 0 3px 0 rgba(0,0,0,.25), 0 14px 30px rgba(0,0,0,.18);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+}
+
+.portrait:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow: 0 6px 0 var(--brass), 0 24px 48px rgba(0,0,0,.32);
+}
+
+.portrait .idx {
+  position: absolute;
+  top: .6rem;
+  left: .8rem;
+  font: 800 1.2rem/1 "Bodoni Moda", serif;
+  color: #a8232b;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+}
+
+.portrait .idx.b {
+  top: auto;
+  left: auto;
+  bottom: .6rem;
+  right: .8rem;
+  transform: rotate(180deg);
+}
+
+.portrait:hover .idx {
+  transform: scale(1.15);
+}
+
+.portrait:hover .idx.b {
+  transform: rotate(180deg) scale(1.15);
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 3/4;
+  border: 2px dashed #c9b98f;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--inkmute);
+  font-size: .9rem;
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.portrait:hover .photo {
+  border-style: solid;
+  border-color: var(--brass);
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.35);
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
+}
+
+.portrait:hover .photo img {
+  transform: scale(1.07);
+  filter: contrast(1.06) brightness(0.92);
+}
+
+/* Diagonal foil sheen sweep on hover */
+.photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28) 48%,
+    rgba(255, 255, 255, 0.05) 54%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.portrait:hover .photo::before {
+  transform: translateX(120%);
+}
+
+/* Subtle bottom vignette + handle tag reveal on hover */
+.photo::after {
+  content: "PYTHONX-01 // IITM";
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.2rem 0.75rem 0.65rem;
+  background: linear-gradient(to top, rgba(13, 14, 17, 0.88) 0%, rgba(13, 14, 17, 0.4) 55%, transparent 100%);
+  color: #fffaf0;
+  font: 600 0.72rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.portrait:hover .photo::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width:700px){header{grid-template-columns:1fr}.portrait{max-width:200px}}
 h1{font-size:clamp(2.6rem,8vw,5.5rem);font-weight:800;letter-spacing:-.02em}
 .code{margin:1rem 0 0;color:var(--brass);font-weight:500}
@@ -61,13 +179,7 @@ h2{font-size:2.2rem;font-weight:500;margin-bottom:.4rem}
 .flush small{color:var(--inkmute);font-size:.85rem;display:block;margin-top:.3rem}
 @media (min-width:760px){.flush a:nth-child(1){transform:rotate(-5deg)}.flush a:nth-child(2){transform:rotate(-2.5deg)}.flush a:nth-child(4){transform:rotate(2.5deg)}.flush a:nth-child(5){transform:rotate(5deg)}}
 .flush a:hover,.flush a:focus-visible{transform:translateY(-12px) rotate(0)}
-.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.5rem}
-.groups h3{font-size:1.5rem;font-weight:500;margin-bottom:.3rem}
-.groups p{margin:0 0 1.1rem;color:var(--mute);font-size:.95rem}
-.chips{display:flex;flex-wrap:wrap;gap:.9rem;padding:0;margin:0;list-style:none}
-.chips li{padding:.45rem 1.1rem;border-radius:999px;font-weight:500;border:2px dashed rgba(255,250,240,.7)}
-.chips .skill{background:#a8232b;color:#fffaf0;box-shadow:0 0 0 3px #a8232b,0 5px 0 rgba(0,0,0,.25)}
-.chips .interest{background:#d2ac55;color:#16342b;border-color:rgba(22,52,43,.6);box-shadow:0 0 0 3px #d2ac55,0 5px 0 rgba(0,0,0,.25)}
+
 .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
 .frame{margin:0}
 .open{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:16/9;padding:0;border:2px dashed var(--line);border-radius:14px;background:transparent;color:var(--mute);font:inherit;font-size:.95rem;cursor:pointer;overflow:hidden;transition:transform .2s}
@@ -81,28 +193,639 @@ dialog .ph{display:flex;align-items:center;justify-content:center;aspect-ratio:1
 dialog p{margin:.8rem 0 0}
 dialog button{margin-top:.8rem;background:var(--ink);color:var(--card);border:0;border-radius:999px;padding:.4rem 1.1rem;font:inherit;cursor:pointer}
 footer{padding:6vh 0 8vh;border-top:1px solid var(--line);color:var(--mute)}
-#controls{position:fixed;top:calc(env(safe-area-inset-top,0px) + .8rem);right:1rem;display:flex;gap:.5rem;z-index:30}
-#controls button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;font:inherit;font-size:.9rem;cursor:pointer}
+
+/* Boastful, tactile top-right controls */
+#controls {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 1rem);
+  right: 1.2rem;
+  display: flex;
+  gap: 0.65rem;
+  z-index: 30;
+}
+
+#controls button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--card);
+  color: var(--ink);
+  border: 1.5px solid var(--brass);
+  border-radius: 999px;
+  padding: 0.55rem 1.2rem;
+  font: 500 0.95rem/1 "Work Sans", system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), 0 2px 0 var(--brass);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.2s ease,
+              background 0.2s ease,
+              border-color 0.2s ease;
+}
+
+#controls button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), 0 4px 0 var(--brass);
+}
+
+#controls button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 1px 0 var(--brass);
+}
+
+/* Special attention-grabbing styling for the Poker Mode toggle */
+#poker::before {
+  content: "♠";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: var(--brass);
+  color: #0d0e11;
+  font: 800 0.85rem/1 "Bodoni Moda", Georgia, serif;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, color 0.25s ease;
+}
+
+#poker:hover::before {
+  transform: rotate(180deg) scale(1.15);
+}
+
+/* When Poker mode is ON, give the badge the signature poker red */
+#poker[aria-pressed="true"]::before {
+  content: "A♥";
+  font-size: 0.7rem;
+  background: var(--red);
+  color: #fffaf0;
+}
+
+/* Subtle breathing aura in plain mode to invite visitors to click it */
+@keyframes invitePulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(122, 162, 247, 0.18), 0 2px 0 var(--brass);
+  }
+  50% {
+    box-shadow: 0 6px 24px rgba(122, 162, 247, 0.42), 0 2px 0 var(--brass), 0 0 0 4px rgba(122, 162, 247, 0.12);
+  }
+}
+
+html[data-mode="plain"] #poker {
+  background: linear-gradient(135deg, #1b1d24 0%, #121318 100%);
+  animation: invitePulse 3s infinite ease-in-out;
+}
+
+html[data-mode="plain"] #poker:hover {
+  animation: none;
+  border-color: #a9c5ff;
+  box-shadow: 0 8px 26px rgba(122, 162, 247, 0.45), 0 4px 0 var(--brass);
+}
+
+/* Icon for the Light/Dark Switch Theme button (visible when Poker is ON) */
+#theme::before {
+  content: "◐";
+  font-size: 1.05rem;
+  color: var(--brass);
+  transition: transform 0.35s ease;
+}
+
+#theme:hover::before {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 520px) {
+  #controls {
+    top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+    right: 0.85rem;
+    gap: 0.45rem;
+  }
+  #controls button {
+    padding: 0.45rem 0.95rem;
+    font-size: 0.85rem;
+  }
+}
+
 .pl{display:none}
 /* Plain mode: no poker, always dark */
 html[data-mode="plain"] .pk,html[data-mode="plain"] .rank,html[data-mode="plain"] .idx,html[data-mode="plain"] #theme{display:none}
 html[data-mode="plain"] .pl{display:inline}
 html[data-mode="plain"] h1,html[data-mode="plain"] h2,html[data-mode="plain"] h3,html[data-mode="plain"] .flush strong{font-family:"Work Sans",system-ui,sans-serif}
-html[data-mode="plain"] .portrait{transform:none;padding:0;background:none;box-shadow:none}
-html[data-mode="plain"] .photo{border:1px solid var(--line);border-radius:14px}
+
+html[data-mode="plain"] .portrait {
+  transform: none;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+html[data-mode="plain"] .portrait:hover {
+  transform: translateY(-6px);
+  box-shadow: none;
+}
+
+html[data-mode="plain"] .photo {
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+html[data-mode="plain"] .portrait:hover .photo {
+  border-color: var(--brass);
+  box-shadow: 0 14px 34px rgba(122, 162, 247, 0.25), 0 0 0 3px rgba(122, 162, 247, 0.12);
+}
+
 html[data-mode="plain"] .card,html[data-mode="plain"] .flush a{border:1px solid var(--line);box-shadow:none}
 html[data-mode="plain"] .flush a:nth-child(n){transform:none}
 html[data-mode="plain"] .flush a:hover,html[data-mode="plain"] .flush a:focus-visible{transform:translateY(-4px)}
-html[data-mode="plain"] .chips li{border:1px solid var(--line);background:var(--card);color:var(--fg);box-shadow:none}
-html[data-mode="plain"] .chips .skill{border-color:var(--brass)}
+
+
 @media (prefers-reduced-motion:reduce){.card,.flush a,.open{transition:none}}
+
+/* Give footer extra bottom breathing room so the dock never covers it */
+footer {
+  padding: 6vh 0 14vh;
+  border-top: 1px solid var(--line);
+  color: var(--mute);
+}
+
+/* Floating Navigation Dock (Professional Medium-Plus Scale) */
+#nav-bar {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 1.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28),
+              0 2px 0 var(--brass),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 25;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+
+#nav-bar:hover {
+  border-color: var(--brass);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.36),
+              0 3px 0 var(--brass),
+              inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* Gliding active background pill */
+#nav-bar .nav-pill {
+  position: absolute;
+  top: 0.45rem;
+  bottom: 0.45rem;
+  left: 0;
+  width: 0;
+  background: var(--fg);
+  border-radius: 999px;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.25s ease,
+              background 0.25s ease;
+}
+
+#nav-bar a {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: color 0.25s ease, transform 0.2s ease;
+}
+
+#nav-bar a:hover {
+  color: var(--brass);
+}
+
+#nav-bar a:hover .suit {
+  transform: translateY(-2px) rotate(-10deg) scale(1.18);
+}
+
+#nav-bar a.active {
+  color: var(--bg);
+}
+
+#nav-bar a.active .suit.r {
+  color: #ff6b72;
+}
+
+#nav-bar .suit {
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-weight: 800;
+  font-size: 1.05rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+}
+
+#nav-bar .suit.r {
+  color: var(--red);
+}
+
+/* Section number badge (shown in Plain mode instead of suits) */
+#nav-bar .num {
+  display: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  opacity: 0.55;
+  font-weight: 600;
+}
+
+#nav-bar a.active .num {
+  opacity: 0.9;
+}
+
+/* Brief heading pulse when smooth-scrolling lands on a section */
+@keyframes sectionFocus {
+  0% { transform: translateX(0); color: var(--fg); }
+  35% { transform: translateX(8px); color: var(--brass); }
+  100% { transform: translateX(0); color: var(--fg); }
+}
+
+section.arrived h2 {
+  animation: sectionFocus 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Plain mode overrides */
+html[data-mode="plain"] #nav-bar {
+  background: rgba(22, 23, 28, 0.9);
+  border-color: #343844;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55),
+              0 2px 0 var(--brass),
+              inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+html[data-mode="plain"] #nav-bar:hover {
+  border-color: var(--brass);
+}
+
+html[data-mode="plain"] #nav-bar .suit {
+  display: none;
+}
+
+html[data-mode="plain"] #nav-bar .num {
+  display: inline-block;
+}
+
+html[data-mode="plain"] #nav-bar .nav-pill {
+  background: var(--brass);
+}
+
+html[data-mode="plain"] #nav-bar a.active {
+  color: #0d0e11;
+}
+
+@media (max-width: 580px) {
+  #nav-bar {
+    width: min(95vw, 460px);
+    justify-content: space-between;
+    padding: 0.35rem;
+  }
+  #nav-bar .nav-pill {
+    top: 0.35rem;
+    bottom: 0.35rem;
+  }
+  #nav-bar a {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.84rem;
+    gap: 0.25rem;
+  }
+  #nav-bar .num {
+    display: none !important;
+  }
+}
+
+/*nav styl9ing end!!!*/
+
+/* === SKILLS BENTO & LIVE INSPECTOR === */
+.inspector {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  border-left: 4px solid var(--brass);
+  min-height: 4.2rem;
+  transition: border-color 0.25s ease, transform 0.2s ease;
+}
+
+.inspector-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.75rem;
+}
+
+.inspector strong {
+  font: 800 1.2rem/1.1 "Bodoni Moda", Georgia, serif;
+  color: var(--ink);
+}
+
+.inspector span {
+  color: var(--inkmute);
+  font-size: 0.95rem;
+}
+
+.inspector-badge {
+  font: 600 0.72rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: var(--brass);
+  color: #fffaf0;
+  white-space: nowrap;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.15rem;
+}
+
+.bento-card {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+}
+
+.bento-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 0.6rem;
+}
+
+.bento-head h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.bento-suit {
+  font: 800 1.5rem/1 "Bodoni Moda", Georgia, serif;
+}
+
+.bento-suit.r {
+  color: var(--red);
+}
+
+.bento-sys {
+  display: none;
+  font: 600 0.75rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--brass);
+  letter-spacing: 0.06em;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.skill-btn {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ink);
+  border: 1.5px solid rgba(22, 52, 43, 0.22);
+  border-radius: 999px;
+  padding: 0.38rem 0.85rem;
+  font: 500 0.88rem/1.2 "Work Sans", system-ui, sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.skill-btn.strong {
+  border-color: var(--red);
+  font-weight: 600;
+}
+
+.skill-btn.strong::before {
+  content: "★";
+  font-size: 0.72rem;
+  color: var(--red);
+}
+
+.skill-btn:hover,
+.skill-btn.active {
+  background: var(--ink);
+  color: var(--card);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.skill-btn:hover::before,
+.skill-btn.active::before {
+  color: var(--brass);
+}
+
+/* === ACADEMIC COURSEWORK GRID === */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.15rem;
+}
+
+.course-card {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 1.3rem;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-6px);
+}
+
+.course-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.course-code {
+  font: 700 0.8rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  background: rgba(138, 106, 30, 0.15);
+  color: var(--brass);
+}
+
+.course-rank {
+  font: 800 1.5rem/1 "Bodoni Moda", Georgia, serif;
+}
+
+.course-rank.r {
+  color: var(--red);
+}
+
+.course-card h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.course-sub {
+  font-size: 0.85rem;
+  color: var(--inkmute);
+  font-weight: 500;
+  margin: 0 0 0.65rem;
+}
+
+.course-desc {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.course-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.75rem;
+}
+
+.course-topics li {
+  font: 500 0.76rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--inkmute);
+}
+
+/* === PLAIN MODE OVERRIDES FOR SKILLS & COURSES === */
+html[data-mode="plain"] .inspector,
+html[data-mode="plain"] .bento-card,
+html[data-mode="plain"] .course-card {
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+html[data-mode="plain"] .inspector {
+  border-left: 4px solid var(--brass);
+}
+
+html[data-mode="plain"] .inspector strong {
+  font-family: "Work Sans", system-ui, sans-serif;
+}
+
+html[data-mode="plain"] .inspector-badge {
+  color: #0d0e11;
+}
+
+html[data-mode="plain"] .bento-card:hover,
+html[data-mode="plain"] .course-card:hover {
+  border-color: var(--brass);
+}
+
+html[data-mode="plain"] .bento-suit,
+html[data-mode="plain"] .course-rank {
+  display: none;
+}
+
+html[data-mode="plain"] .bento-sys {
+  display: inline-block;
+}
+
+html[data-mode="plain"] .skill-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--line);
+}
+
+html[data-mode="plain"] .skill-btn.strong {
+  border-color: rgba(122, 162, 247, 0.55);
+}
+
+html[data-mode="plain"] .skill-btn:hover,
+html[data-mode="plain"] .skill-btn.active {
+  background: var(--brass);
+  color: #0d0e11;
+  border-color: var(--brass);
+}
+
+html[data-mode="plain"] .skill-btn:hover::before,
+html[data-mode="plain"] .skill-btn.active::before {
+  color: #0d0e11;
+}
+
+html[data-mode="plain"] .course-code {
+  background: rgba(122, 162, 247, 0.14);
+}
+
+html[data-mode="plain"] .course-topics li {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+  .inspector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #nav-bar a {
+    padding: 0.4rem 0.48rem;
+    font-size: 0.78rem;
+  }
+}
+
 </style>
 </head>
 <body>
 <div id="progress" aria-hidden="true"><span></span></div>
 <div id="controls">
 <button id="theme" type="button">Switch theme</button>
-<button id="poker" type="button" aria-pressed="true">Poker: on</button>
+<button id="poker" type="button" aria-pressed="true">Poker: off</button>
 </div>
 <main>
 <header>
@@ -129,8 +852,8 @@ html[data-mode="plain"] .chips .skill{border-color:var(--brass)}
 <p class="sub">I draw digitally. Still learning, but I can hold my own.</p>
 <!-- To add art: put <img src="art/your-image.jpg" alt="Describe the drawing"> in place of the "Artwork coming soon" span, and write your description in the figcaption. -->
 <div class="gallery">
-<figure class="frame"><button type="button" class="open"><span><img src="genesis.png" alt="whale"></span></button><figcaption>Weightless genesis, a drawing that was made around being liminal at best</figcaption></figure>
-<figure class="frame"><button type="button" class="open"><span><img src="snake.jpg" alt="A clown trapped in a vicious cycle"></span></button><figcaption>A clown in a vicious cycle of entertaining everyone but not looking at himself</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span><img src="genesis.png" alt="whale" loading="lazy"></span></button><figcaption>Weightless genesis, a drawing that was made around being liminal at best</figcaption></figure>
+<figure class="frame"><button type="button" class="open"><span><img src="snake.jpg" alt="A clown trapped in a vicious cycle" loading="lazy"></span></button><figcaption>A clown in a vicious cycle of entertaining everyone but not looking at himself</figcaption></figure>
 <figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Coming soon.</figcaption></figure>
 <figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Coming soon.</figcaption></figure>
 <figure class="frame"><button type="button" class="open"><span>Artwork coming soon</span></button><figcaption>Coming soon.</figcaption></figure>
@@ -150,14 +873,158 @@ html[data-mode="plain"] .chips .skill{border-color:var(--brass)}
 </section>
 
 <section id="skills">
-<h2>Skills &amp; interests</h2>
-<p class="sub"><span class="pk">Skills are the cards I can play right now. Interests are the ones I’m still drawing.</span><span class="pl">Skills are what I can build with today. Interests are what I’m growing into.</span></p>
-<div class="groups">
-<div><h3>Skills</h3><p>What I can build with today.</p>
-<ul class="chips"><li class="skill">Python</li><li class="skill">Bash</li><li class="skill">JavaScript</li><li class="skill">Linux</li><li class="skill">Web development</li><li class="skill">Digital art</li></ul></div>
-<div><h3>Interests</h3><p>What I’m studying, chasing, or just enjoy.</p>
-<ul class="chips"><li class="interest">Maths</li><li class="interest">Cybersecurity</li><li class="interest">Quant</li><li class="interest">AI &amp; ML</li><li class="interest">Anime</li><li class="interest pk">Poker</li><li class="interest">Gaming</li></ul></div>
-</div>
+  <h2>Skills &amp; toolkit</h2>
+  <p class="sub"><span class="pk">Four suits in my hand. Tap or hover any chip to inspect how I play it.</span><span class="pl">Core stack &amp; computational tools. Tap or hover any tag to inspect details.</span></p>
+
+  <div class="inspector" id="skill-inspector" aria-live="polite">
+    <div class="inspector-main">
+      <strong id="insp-title">Mathematica</strong>
+      <span id="insp-desc">Symbolic computation, algebraic manipulation, calculus workflows, and mathematical modeling in MA1103.</span>
+    </div>
+    <span class="inspector-badge" id="insp-level">Strong · Compute</span>
+  </div>
+
+  <div class="bento">
+    <div class="bento-card">
+      <div class="bento-head">
+        <h3>Math &amp; Scientific Compute</h3>
+        <span class="bento-suit r">♦</span>
+        <span class="bento-sys">SYS // 01</span>
+      </div>
+      <div class="skill-tags">
+        <button type="button" class="skill-btn strong active" data-level="Strong · Compute" data-desc="Symbolic computation, algebraic manipulation, calculus workflows, and mathematical modeling in MA1103.">Mathematica</button>
+        <button type="button" class="skill-btn strong" data-level="Strong · Numerical" data-desc="800+ line numerical scripts: root-finding algorithms, bisection solvers, polynomial fitting, and 3D surface plotting.">MATLAB</button>
+        <button type="button" class="skill-btn strong" data-level="Strong · Statistics" data-desc="Statistical computing, data visualization, probability distributions, and scientific scripting in MA1103.">R</button>
+        <button type="button" class="skill-btn strong" data-level="Strong · Core" data-desc="NumPy & Matplotlib visualizers for complex grid fractals, parametric Lissajous curves, random walks, and contour plots.">Python</button>
+        <button type="button" class="skill-btn" data-level="Core · Symbolic" data-desc="Open-source symbolic mathematics and algebraic experimentation alongside coursework.">SageMath</button>
+      </div>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-head">
+        <h3>Languages &amp; Engineering</h3>
+        <span class="bento-suit">♠</span>
+        <span class="bento-sys">SYS // 02</span>
+      </div>
+      <div class="skill-tags">
+        <button type="button" class="skill-btn strong" data-level="Strong · Shell" data-desc="Automating everyday Linux tasks, file pipelines, and custom command-line utilities in PYTHONX Toolkit.">Bash</button>
+        <button type="button" class="skill-btn" data-level="Core · Systems" data-desc="Algorithmic trading and quantitative bidding bots, STL data structures, and competitive programming.">C++</button>
+        <button type="button" class="skill-btn" data-level="Core · Web" data-desc="Zero-dependency interactive DOM/Canvas demos, smooth physics animations, and browser-based math playgrounds.">JavaScript</button>
+        <button type="button" class="skill-btn" data-level="Core · UI" data-desc="Semantic HTML and custom multi-theme CSS architectures built from scratch.">HTML &amp; CSS</button>
+      </div>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-head">
+        <h3>Systems, Security &amp; Quant</h3>
+        <span class="bento-suit">♣</span>
+        <span class="bento-sys">SYS // 03</span>
+      </div>
+      <div class="skill-tags">
+        <button type="button" class="skill-btn strong" data-level="Daily Driver" data-desc="Primary operating environment for development, shell scripting, and system tinkering.">Linux</button>
+        <button type="button" class="skill-btn" data-level="Exploring · Sec" data-desc="Studying system security, networking fundamentals, and offensive/defensive concepts every week.">Cybersecurity</button>
+        <button type="button" class="skill-btn" data-level="Exploring · Finance" data-desc="Multi-variant quantitative bidding strategies, expected value modeling, and algorithmic execution.">Quant &amp; Bidding</button>
+        <button type="button" class="skill-btn" data-level="Exploring · ML" data-desc="Mathematical foundations of machine learning, linear models, and optimization.">AI &amp; ML</button>
+        <button type="button" class="skill-btn" data-level="Workflow" data-desc="Version control, PowerShell/CLI environments, and VS Code configurations.">Git &amp; CLI</button>
+      </div>
+    </div>
+
+    <div class="bento-card">
+      <div class="bento-head">
+        <h3>Creative &amp; Off-Clock</h3>
+        <span class="bento-suit r">♥</span>
+        <span class="bento-sys">SYS // 04</span>
+      </div>
+      <div class="skill-tags">
+        <button type="button" class="skill-btn" data-level="Craft · Visual" data-desc="Digital illustration with tablet & stylus using Krita and ibisPaint X, focusing on liminal themes and cool palettes.">Digital Art</button>
+        <button type="button" class="skill-btn" data-level="Craft · Physical" data-desc="Geometric origami, paper sculpture, and Fine Arts workshops at IIT Madras.">Origami &amp; Fine Arts</button>
+        <button type="button" class="skill-btn pk" data-level="Game Theory" data-desc="Texas Hold'em strategy and probability — favorite starting hand to play is Ace-King (A-K).">Poker (A-K)</button>
+        <button type="button" class="skill-btn" data-level="Off-Clock" data-desc="DOOM, Cyberpunk 2077, Elden Ring, Baldur's Gate 3, MiSide, plus Chainsaw Man, JoJo, and Frieren.">Gaming &amp; Anime</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="courses">
+  <h2>Coursework</h2>
+  <p class="sub"><span class="pk">The academic foundation dealt at IIT Madras.</span><span class="pl">Core BS Mathematics &amp; Physics coursework at IIT Madras.</span></p>
+
+  <div class="courses-grid">
+    <article class="course-card">
+      <div>
+        <div class="course-top">
+          <span class="course-code">MA2101</span>
+          <span class="course-rank r">A♦</span>
+        </div>
+        <h3>Linear Algebra</h3>
+        <p class="course-sub">Vector Spaces &amp; Matrix Theory</p>
+        <p class="course-desc">Rigorous study of vector spaces, row-reduced echelon form (RREF), basis, dimension, and rank-nullity, advancing through linear transformations, eigenvalues, Singular Value Decomposition (SVD), and the Cayley–Hamilton theorem.</p>
+      </div>
+      <ul class="course-topics">
+        <li>Cayley–Hamilton</li>
+        <li>SVD</li>
+        <li>RREF</li>
+        <li>Basis &amp; Nullity</li>
+        <li>Eigen-systems</li>
+      </ul>
+    </article>
+
+    <article class="course-card">
+      <div>
+        <div class="course-top">
+          <span class="course-code">MA1100</span>
+          <span class="course-rank">K♠</span>
+        </div>
+        <h3>One-Variable Calculus</h3>
+        <p class="course-sub">Core Real Analysis &amp; Calculus</p>
+        <p class="course-desc">Foundational real analysis covering number systems, sets and their real applications, sequences, formal limits, continuity, differentiability, Taylor series expansions, and Riemann integration.</p>
+      </div>
+      <ul class="course-topics">
+        <li>Real Analysis</li>
+        <li>Sets &amp; Number Systems</li>
+        <li>Limits &amp; Diff.</li>
+        <li>Taylor Series</li>
+        <li>Integration</li>
+      </ul>
+    </article>
+
+    <article class="course-card">
+      <div>
+        <div class="course-top">
+          <span class="course-code">MA1103</span>
+          <span class="course-rank">Q♣</span>
+        </div>
+        <h3>Scientific Computing</h3>
+        <p class="course-sub">Symbolic, Numerical &amp; Statistical Compute</p>
+        <p class="course-desc">Hands-on mathematical computation and algorithmic scripting across four major scientific ecosystems: symbolic algebra in Mathematica, matrix &amp; numerical methods in MATLAB, statistical modeling in R, and Python scripting.</p>
+      </div>
+      <ul class="course-topics">
+        <li>Mathematica</li>
+        <li>MATLAB</li>
+        <li>Python</li>
+        <li>R</li>
+        <li>Numerical Solvers</li>
+      </ul>
+    </article>
+
+    <article class="course-card">
+      <div>
+        <div class="course-top">
+          <span class="course-code">PH1010</span>
+          <span class="course-rank r">J♥</span>
+        </div>
+        <h3>Physics I: Mechanics</h3>
+        <p class="course-sub">Classical &amp; Analytical Mechanics</p>
+        <p class="course-desc">Classical mechanics starting from Newtonian dynamics, momentum, harmonic oscillations, and central force motion, building all the way up to variational principles and Lagrangian mechanics.</p>
+      </div>
+      <ul class="course-topics">
+        <li>Lagrangian Mechanics</li>
+        <li>Oscillations</li>
+        <li>Central Forces</li>
+        <li>Conservation Laws</li>
+      </ul>
+    </article>
+  </div>
 </section>
 
 <section id="contact">
@@ -172,7 +1039,20 @@ html[data-mode="plain"] .chips .skill{border-color:var(--brass)}
 </div>
 </section>
 </main>
-<footer><main>© 2026 Mukul Dev Laxwal</main></footer>
+
+<!--Nav-->
+<nav id="nav-bar" aria-label="Quick Navigation">
+  <span class="nav-pill" aria-hidden="true"></span>
+  <a href="#work"><span class="suit r">♠</span><span class="num">01</span>Work</a>
+  <a href="#art"><span class="suit">♥</span><span class="num">02</span>Art</a>
+  <a href="#about"><span class="suit r">♦</span><span class="num">03</span>About</a>
+  <a href="#skills"><span class="suit">♣</span><span class="num">04</span>Skills</a>
+  <a href="#courses"><span class="suit r">♦</span><span class="num">05</span>Courses</a>
+  <a href="#contact"><span class="suit">♠</span><span class="num">06</span>Contact</a>
+</nav>
+<!--Nav End-->
+
+<footer><div style="max-width:1000px;margin:0 auto;padding:0 1.5rem">© 2026 Mukul Dev Laxwal</div></footer>
 <dialog id="viewer"><div id="viewer-media"></div><p id="viewer-text"></p><button type="button" id="viewer-close">Close</button></dialog>
 <script>
 var root=document.documentElement;
@@ -221,6 +1101,120 @@ document.querySelectorAll('.card').forEach(function(c){
 document.getElementById('theme').addEventListener('click',function(){
   var dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
   root.dataset.theme=dark?'light':'dark';
+});
+
+var navBar = document.getElementById('nav-bar');
+var navPill = navBar.querySelector('.nav-pill');
+var navLinks = document.querySelectorAll('#nav-bar a');
+var trackedSections = document.querySelectorAll('section[id]');
+var isAutoScrolling = false;
+
+function movePillTo(link) {
+  if (!link) {
+    navPill.style.opacity = '0';
+    return;
+  }
+  navLinks.forEach(function(l) { l.classList.remove('active'); });
+  link.classList.add('active');
+  navPill.style.width = link.offsetWidth + 'px';
+  navPill.style.transform = 'translateX(' + link.offsetLeft + 'px)';
+  navPill.style.opacity = '1';
+}
+
+// Custom smooth scroll with cubic easing
+function smoothScrollTo(targetEl, duration) {
+  var startY = window.scrollY;
+  var targetY = targetEl.getBoundingClientRect().top + startY - 24;
+  var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  if (targetY > maxScroll) targetY = maxScroll;
+  var diff = targetY - startY;
+  var startTime = null;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || Math.abs(diff) < 5) {
+    window.scrollTo(0, targetY);
+    return;
+  }
+
+  isAutoScrolling = true;
+
+  function easeOutQuint(t) {
+    return 1 - Math.pow(1 - t, 5);
+  }
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    var elapsed = timestamp - startTime;
+    var progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, startY + diff * easeOutQuint(progress));
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      isAutoScrolling = false;
+      targetEl.classList.remove('arrived');
+      void targetEl.offsetWidth; // trigger reflow
+      targetEl.classList.add('arrived');
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+navLinks.forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    var targetId = link.getAttribute('href');
+    var targetSection = document.querySelector(targetId);
+    if (targetSection) {
+      e.preventDefault();
+      movePillTo(link);
+      smoothScrollTo(targetSection, 700);
+      history.pushState(null, '', targetId);
+    }
+  });
+});
+
+var observer = new IntersectionObserver(function(entries) {
+  if (isAutoScrolling) return;
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var id = entry.target.getAttribute('id');
+      var activeLink = navBar.querySelector('a[href="#' + id + '"]');
+      if (activeLink) movePillTo(activeLink);
+    }
+  });
+}, { rootMargin: '-40% 0px -40% 0px' });
+
+trackedSections.forEach(function(sec) { observer.observe(sec); });
+
+// Keep pill aligned if window resizes or Poker mode toggles
+window.addEventListener('resize', function() {
+  var current = navBar.querySelector('a.active');
+  if (current) movePillTo(current);
+});
+pbtn.addEventListener('click', function() {
+  setTimeout(function() {
+    var current = navBar.querySelector('a.active');
+    if (current) movePillTo(current);
+  }, 20);
+});
+
+// Live Skill Inspector
+var skillBtns = document.querySelectorAll('.skill-btn');
+var inspTitle = document.getElementById('insp-title');
+var inspDesc = document.getElementById('insp-desc');
+var inspLevel = document.getElementById('insp-level');
+
+function selectSkill(btn) {
+  skillBtns.forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  inspTitle.textContent = btn.textContent;
+  inspDesc.textContent = btn.getAttribute('data-desc');
+  inspLevel.textContent = btn.getAttribute('data-level');
+}
+
+skillBtns.forEach(function(btn) {
+  btn.addEventListener('mouseenter', function() { selectSkill(btn); });
+  btn.addEventListener('click', function() { selectSkill(btn); });
 });
 </script>
 </body>
